@@ -6,6 +6,10 @@
 </head>
 <body>
     <h1>"You are amazing person!"</h1>
-    {{ leads }}
+    <ul>
+        {% for lead in leads %}
+        <li> {{ lead }} </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
