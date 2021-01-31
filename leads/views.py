@@ -11,3 +11,10 @@ def lead_list(request):
         "leads": leads
     }
     return render(request, "home.html", context)
+
+
+def lead_detail(request, pk):
+    print(pk)
+    lead = Lead.objects.get(id=pk)
+    print(lead)
+    return HttpResponse("Here is a detail view")
