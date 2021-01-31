@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .forms import LeadForm
 from .models import Lead
 # Create your views here.
 
@@ -22,4 +23,7 @@ def lead_detail(request, pk):
 
 
 def lead_create(request):
-    return render(request, 'lead_create.html')
+    context = {
+        "form": LeadForm()
+    }
+    return render(request, 'lead_create.html', context)
