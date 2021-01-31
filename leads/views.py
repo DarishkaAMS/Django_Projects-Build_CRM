@@ -5,7 +5,7 @@ from .models import Lead
 # Create your views here.
 
 
-def home_page(request):
+def lead_list(request):
     leads = Lead.objects.all()
     context = {
         "leads": leads
