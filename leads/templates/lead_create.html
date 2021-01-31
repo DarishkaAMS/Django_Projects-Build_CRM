@@ -13,7 +13,13 @@
     <a href="/leads"> Go back to leads </a>
     <hr/>
     <h1> Create a new lead </h1>
-    {{ form }}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary"> Submit </button>
+    </form>
+
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
