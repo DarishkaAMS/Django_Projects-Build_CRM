@@ -10,6 +10,10 @@ class LeadModelForm(forms.ModelForm):
             "last_name",
             "age",
             "agent",
+            "phoned",
+            "source",
+            "profile_picture",
+            "special_fields",
         )
 
 

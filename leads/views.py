@@ -27,16 +27,7 @@ def lead_create(request):
     if request.method == "POST":
         form = LeadModelForm(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            age = form.cleaned_data['age']
-            agent = form.cleaned_data['agent']
-            Lead.objects.create(
-                first_name=first_name,
-                last_name=last_name,
-                age=age,
-                agent=agent,
-            )
+            form.save()
             return redirect("/leads")
     context = {
         "form": form
