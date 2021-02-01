@@ -1,4 +1,15 @@
 from django import forms
+from .models import Lead
+
+
+class LeadModelForm(forms.Form):
+    class Meta:
+        fields = (
+            "first_name",
+            "last_name",
+            "age",
+            "agent",
+        )
 
 
 class LeadForm(forms.Form):
