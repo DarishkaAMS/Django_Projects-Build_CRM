@@ -19,14 +19,14 @@
     <title>Leads</title>
 </head>
 <body>
-    <a href="/leads"> Go back to leads </a>
+    <a href="{% url 'leads:lead-list' %}"> Go back to leads </a>
     <hr/>
     <h1> {{ lead.first_name }} {{ lead.last_name }} detail </h1>
     <p> This person is {{ lead.age }} old </p>
     <p> The agent responsible fro this lead is: <b> {{ lead.agent }} </b> </b></p>
     <hr/>
-    <a href="/leads/{{ lead.pk }}/update/"> Update </a>
-    <a href="/leads/{{ lead.pk }}/delete/"> Delete </a>
+    <a href="{% url 'leads:lead-update' lead.pk %}"> Update </a>
+    <a href="{% url 'leads:lead-delete' lead.pk %}"> Delete </a>
 
 
 
