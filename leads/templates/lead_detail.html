@@ -24,6 +24,12 @@
     <h1> {{ lead.first_name }} {{ lead.last_name }} detail </h1>
     <p> This person is {{ lead.age }} old </p>
     <p> The agent responsible fro this lead is: <b> {{ lead.agent }} </b> </b></p>
+    <hr/>
+    <a href="/leads/{{ lead.pk }}/update/"> Update </a>
+    <a href="/leads/{{ lead.pk }}/delete/"> Delete </a>
+
+
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
