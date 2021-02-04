@@ -1,19 +1,27 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.generic import TemplateView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
 from .forms import LeadForm, LeadModelForm
 from .models import Agent, Lead
 # Create your views here.
 
 
+# CRUD+L = Create, Retrieve, Update, Delete + List
+
+
 class LandingPageView(TemplateView):
     template_name = "landing.html"
 
 
-
 def landing_page(request):
     return render(request, "landing.html")
+
+
+class LeadListView(ListView):
+    template_name = "lead_list.html"
+    queryset = Lead.objects.all()
+    # context_object_name = "leads" - no need to change in html
 
 
 def lead_list(request):
@@ -24,12 +32,23 @@ def lead_list(request):
     return render(request, "lead_list.html", context)
 
 
+class LeadDetailView(DetailView):
+    template_name = "lead_detail.html"
+    queryset = Lead.objects.all()
+    context_object_name = "lead"
+
+
 def lead_detail(request, pk):
     lead = Lead.objects.get(id=pk)
     context = {
         "lead": lead
     }
     return render(request, "lead_detail.html", context)
+
+
+class LeadCreateView(CreateView):
+    template_name = "lead_create.html"
+    form_class = LeadModelForm
 
 
 def lead_create(request):
