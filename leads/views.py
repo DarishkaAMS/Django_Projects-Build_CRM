@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render, reverse
 from django.http import HttpResponse
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
@@ -49,6 +49,9 @@ def lead_detail(request, pk):
 class LeadCreateView(CreateView):
     template_name = "lead_create.html"
     form_class = LeadModelForm
+
+    def get_success_url(self):
+        return reverse("leads:lead-list")
 
 
 def lead_create(request):
