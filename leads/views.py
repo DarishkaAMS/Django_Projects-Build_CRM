@@ -67,6 +67,15 @@ def lead_create(request):
     return render(request, 'lead_create.html', context)
 
 
+class LeadUpdateView(UpdateView):
+    template_name = "lead_update.html"
+    form_class = LeadModelForm
+    queryset = Lead.objects.all()
+
+    def get_success_url(self):
+        return reverse("leads:lead-list")
+
+
 def lead_update(request, pk):
     lead = Lead.objects.get(id=pk)
     form = LeadModelForm(instance=lead)
