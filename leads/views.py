@@ -11,6 +11,14 @@ from .models import Agent, Lead
 # CRUD+L = Create, Retrieve, Update, Delete + List
 
 
+class SignupView(generic.CreateView):
+    template_name = "registration/signup.html"
+    form_class = LeadModelForm
+
+    def get_success_url(self):
+        return reverse("leads:lead-list")
+
+
 class LandingPageView(generic.TemplateView):
     template_name = "landing.html"
 
