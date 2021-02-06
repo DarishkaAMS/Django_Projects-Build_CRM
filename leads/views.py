@@ -1,4 +1,5 @@
 # from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render, reverse
 from django.http import HttpResponse
@@ -28,7 +29,7 @@ def landing_page(request):
     return render(request, "landing.html")
 
 
-class LeadListView(generic.ListView):
+class LeadListView(LoginRequiredMixin, generic.ListView):
     template_name = "lead_list.html"
     queryset = Lead.objects.all()
     # context_object_name = "leads" - no need to change in html
