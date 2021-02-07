@@ -7,6 +7,8 @@ from django.views import generic
 
 from .forms import LeadForm, LeadModelForm, CustomUserCreationForm
 from .models import Agent, Lead
+
+from agents.mixins import OrganizerAndLoginRequiredMixin
 # Create your views here.
 
 
@@ -31,8 +33,13 @@ def landing_page(request):
 
 class LeadListView(LoginRequiredMixin, generic.ListView):
     template_name = "lead_list.html"
-    queryset = Lead.objects.all()
-    # context_object_name = "leads" - no need to change in html
+    context_object_name = "leads"
+
+    def get_queryset(self):
+        queryset = Lead.objects.all()
+        if self.request.user.is_agent:
+            queryset = queryset.filter()
+        return queryset
 
 
 def lead_list(request):
@@ -57,7 +64,7 @@ def lead_detail(request, pk):
     return render(request, "lead_detail.html", context)
 
 
-class LeadCreateView(LoginRequiredMixin, generic.CreateView):
+class LeadCreateView(OrganizerAndLoginRequiredMixin, generic.CreateView):
     template_name = "lead_create.html"
     form_class = LeadModelForm
 
@@ -88,7 +95,7 @@ def lead_create(request):
     return render(request, 'lead_create.html', context)
 
 
-class LeadUpdateView(LoginRequiredMixin, generic.UpdateView):
+class LeadUpdateView(OrganizerAndLoginRequiredMixin, generic.UpdateView):
     template_name = "lead_update.html"
     form_class = LeadModelForm
     queryset = Lead.objects.all()
@@ -112,7 +119,7 @@ def lead_update(request, pk):
     return render(request, "lead_update.html", context)
 
 
-class LeadDeleteView(LoginRequiredMixin, generic.DeleteView):
+class LeadDeleteView(OrganizerAndLoginRequiredMixin, generic.DeleteView):
     template_name = "lead_delete.html"
     queryset = Lead.objects.all()
 
