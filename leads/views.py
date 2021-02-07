@@ -58,8 +58,19 @@ def lead_list(request):
 
 class LeadDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "lead_detail.html"
-    queryset = Lead.objects.all()
     context_object_name = "lead"
+
+    def get_queryset(self):
+        user = self.request.user
+
+        # initial queryset of leads for the entire organization
+        if user.is_organizer:
+            queryset = Lead.objects.filter(organization=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organization=user.agent.organization)
+            # filter for the agent that is logged in
+            queryset = queryset.filter(agent__user=user)
+        return queryset
 
 
 def lead_detail(request, pk):
@@ -104,7 +115,10 @@ def lead_create(request):
 class LeadUpdateView(OrganizerAndLoginRequiredMixin, generic.UpdateView):
     template_name = "lead_update.html"
     form_class = LeadModelForm
-    queryset = Lead.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user
+        return Lead.objects.filter(organization=user.userprofile)
 
     def get_success_url(self):
         return reverse("leads:lead-list")
@@ -127,7 +141,10 @@ def lead_update(request, pk):
 
 class LeadDeleteView(OrganizerAndLoginRequiredMixin, generic.DeleteView):
     template_name = "lead_delete.html"
-    queryset = Lead.objects.all()
+
+    def get_queryset(self):
+        user = self.request.user
+        return Lead.objects.filter(organization=user.userprofile)
 
     def get_success_url(self):
         return reverse("leads:lead-list")
