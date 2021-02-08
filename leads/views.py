@@ -186,5 +186,8 @@ class AssignAgentView(OrganizerAndLoginRequiredMixin, generic.FormView):
         return reverse("leads:lead-list")
 
     def form_valid(self, form):
-        print(form.cleaned_data)
+        agent = form.cleaned_data["agent"]
+        lead = Lead.objects.get(id=self.kwargs["pk"])
+        lead.agent = agent
+        lead.save()
         return super(AssignAgentView, self).form_valid(form)
