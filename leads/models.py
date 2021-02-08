@@ -28,6 +28,7 @@ class Lead(models.Model):
     age = models.IntegerField(default=0)
     organization = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey("Category", null=True, blank=True, on_delete=models.SET_NULL)
 
     phoned = models.BooleanField(default=False)
     source = models.CharField(choices=SOURCE_CHOICES, max_length=100)
