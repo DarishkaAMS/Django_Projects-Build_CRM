@@ -36,4 +36,7 @@ class LeadForm(forms.Form):
 
 
 class AssignAgentForm(forms.Form):
-    agent = forms.ChoiceField(choices=["agent 1", "agent 2"])
+    agent = forms.ChoiceField(choices=(
+        ("agent 1", "agent 1 Full Name"),
+        ("agent 2", "agent 2 Full Name"),
+    ))
