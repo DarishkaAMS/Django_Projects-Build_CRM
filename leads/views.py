@@ -220,3 +220,17 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
         else:
             queryset = Lead.objects.filter(organization=user.agent.organization)
         return queryset
+
+
+class CategoryDetailView(LoginRequiredMixin, generic.DetailView):
+    template_name = "category_detail.html"
+
+    def get_queryset(self):
+        user = self.request.user
+
+        # initial queryset of leads for the entire organization
+        if user.is_organizer:
+            queryset = Category.objects.filter(organization=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organization=user.agent.organization)
+        return queryset
