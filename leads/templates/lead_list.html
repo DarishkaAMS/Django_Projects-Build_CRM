@@ -6,6 +6,9 @@
       <div class="w-full mb-6 py-6 flex justify-between items-center border-b border-white-200">
           <div>
               <h1 class="text-4xl text-white-800"> Leads to work with </h1>
+              <a class="hover:text-blue-500" href="{% url 'leads:category-list' %}">
+                  View Categories
+              </a>
           </div>
           {% if request.user.is_organizer %}
           <div>
