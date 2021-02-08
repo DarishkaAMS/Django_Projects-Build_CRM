@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render, reverse
 from django.http import HttpResponse
 from django.views import generic
 
-from .forms import LeadForm, LeadModelForm, CustomUserCreationForm
+from .forms import AssignAgentForm, LeadForm, LeadModelForm, CustomUserCreationForm
 from .models import Agent, Lead
 
 from agents.mixins import OrganizerAndLoginRequiredMixin
@@ -173,5 +173,7 @@ def lead_delete(request, pk):
 
 class AssignAgentView(OrganizerAndLoginRequiredMixin, generic.FormView):
     template_name = "assign_agent.html"
+    form_class = AssignAgentForm
 
-
+    def get_success_url(self):
+        return reverse("leads:lead-list")
