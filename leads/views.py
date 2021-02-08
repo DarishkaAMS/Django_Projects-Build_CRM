@@ -175,5 +175,10 @@ class AssignAgentView(OrganizerAndLoginRequiredMixin, generic.FormView):
     template_name = "assign_agent.html"
     form_class = AssignAgentForm
 
+    def get_form_kwargs(self):
+        return {
+            "request": self.request
+        }
+
     def get_success_url(self):
         return reverse("leads:lead-list")
