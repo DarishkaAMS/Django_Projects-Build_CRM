@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.views import generic
 
 from .forms import AssignAgentForm, LeadForm, LeadModelForm, CustomUserCreationForm
-from .models import Agent, Lead
+from .models import Agent, Category, Lead
 
 from agents.mixins import OrganizerAndLoginRequiredMixin
 
@@ -196,3 +196,12 @@ class AssignAgentView(OrganizerAndLoginRequiredMixin, generic.FormView):
 class CategoryListView(LoginRequiredMixin, generic.ListView):
     template_name = "category_list.html"
 
+    def get_queryset(self):
+        user = self.request.user
+
+        # initial queryset of leads for the entire organization
+        if user.is_organizer:
+            queryset = Category.objects.filter(organization=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organization=user.agent.organization)
+        return queryset
