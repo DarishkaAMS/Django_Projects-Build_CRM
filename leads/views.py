@@ -195,6 +195,7 @@ class AssignAgentView(OrganizerAndLoginRequiredMixin, generic.FormView):
 
 class CategoryListView(LoginRequiredMixin, generic.ListView):
     template_name = "category_list.html"
+    context_object_name = "category_list"
 
     def get_queryset(self):
         user = self.request.user
