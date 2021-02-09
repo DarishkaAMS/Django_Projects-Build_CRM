@@ -1,3 +1,16 @@
-pip freeze > requirements.txt
-
-Django~=3.1.5
+asgiref==3.3.1
+click==7.1.2
+Django==3.1.5
+django-crispy-forms==1.11.0
+h5py==3.1.0
+joblib==1.0.0
+Keras==2.4.3
+nltk==3.5
+numpy==1.19.5
+Pillow==8.1.0
+pytz==2020.5
+PyYAML==5.4.1
+regex==2020.11.13
+scipy==1.6.0
+sqlparse==0.4.1
+tqdm==4.56.0
