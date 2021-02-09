@@ -241,7 +241,7 @@ class LeadCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "lead_category_update.html"
     form_class = LeadCategoryUpdateForm
 
-    def get_context_data(self, **kwargs):
+    def get_queryset(self):
         user = self.request.user
         if user.is_organizer:
             queryset = Lead.objects.filter(organization=user.userprofile)
@@ -252,5 +252,5 @@ class LeadCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
         return queryset
 
     def get_success_url(self):
-        return reverse("leads:lead-list")
+        return reverse("leads:lead-detail", kwargs={"pk": self.get_object().id})
 
