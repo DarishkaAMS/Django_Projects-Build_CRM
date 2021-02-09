@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render, reverse
 from django.http import HttpResponse
 from django.views import generic
 
-from .forms import AssignAgentForm, LeadForm, LeadModelForm, CustomUserCreationForm
+from .forms import AssignAgentForm, LeadCategoryUpdateForm, LeadForm, LeadModelForm, CustomUserCreationForm
 from .models import Agent, Category, Lead
 
 from agents.mixins import OrganizerAndLoginRequiredMixin
@@ -239,7 +239,7 @@ class CategoryDetailView(LoginRequiredMixin, generic.DetailView):
 
 class LeadCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "lead_category_update.html"
-    form_class = LeadModelForm
+    form_class = LeadCategoryUpdateForm
 
     def get_context_data(self, **kwargs):
         user = self.request.user
