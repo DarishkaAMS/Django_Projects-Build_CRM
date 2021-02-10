@@ -3,6 +3,7 @@ click==7.1.2
 crispy-tailwind==0.2.0
 Django==3.1.5
 django-crispy-forms==1.11.0
+django-environ==0.4.5
 h5py==3.1.0
 joblib==1.0.0
 Keras==2.4.3
