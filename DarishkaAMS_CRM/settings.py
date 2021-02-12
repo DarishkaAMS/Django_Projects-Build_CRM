@@ -151,9 +151,9 @@ if not DEBUG:
 
     ALLOWED_HOSTS = ["*"] # or my_domain.com
 
-EMAIL_HOST = "smtp.mailgun.org"
-EMAIL_HOST_USER = "postmaster@mg.domain.com"
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = "Dummy@domain.com"
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
